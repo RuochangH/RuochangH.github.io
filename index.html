@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+    <script src = "http://d3js.org/d3.v3.min.js"></script>
+    <meta charset="utf-8">
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+    <h1>Divvy Bike-share Station Hourly Departure Projection</h1>
+      <div class="slide1">
+        <div id="intro">
+          <h2>Introduction</h2>
+          <p class="intro">In  2013, the city of Chicago lauched
+            <a href="https://www.divvybikes.com">Divvy bike share system</a>.
+            As a new mode that facilitates short distance travels and transit rides,
+            the system is popular across the town. However, the unbalanced bike flows hamper
+            the operation and expansion of the system. On the one hand, it results in full
+            or empty station frequently, downgrading the reliability of the system.
+            On the other hand, bike reallocation, solution to this problem, is based on
+            real-time activity, which is costy and lagging behind.</p>
+          <p class="intro">While the unbalanced bike flow is inherented, pro-active reallocation has the potential
+            to reduce the cost and reduce loss of customers. Therefore, this project is designed to
+            build a OLS model to project the hourly departure for 147 stations near downtown Loop.</p>
+          <hr></hr>
+          <h2>Model Building</h2>
+          <p>The model was built on 147 stations near downtown Chicago for the second week of June in 2017, because there
+            are greater rebalancing demand due to the prominent commuting patterns in warm days. During model building
+            process, candidate predictors are selected based on their explanatory power and the selection was finalized
+            by model generalizability suggested by cross-validation</p>
+          <p>Before start, take a look at the accumulated departures in each stations for a weekday</p>
+          <button id="s">Show<button>
+        </div>
+      </div>
+    <div class="slide2" style="display: none;">
+      <h2>Observe Hourly Departure Difference Across Locations and Times</h2>
+      <p>To build the predictive model for hourly departures, the biggest challenge is that the our dependent variables
+          are highly spatial- and serial- correlated because demands are usually concentrated in certain time period and location.</p>
+      <p>To Learn more about the problem, select day and time to explore.</p>
+      <div>
+        <p>Select a day</p>
+        <select id="aweek">
+          <option>Weekday</option>
+          <option>Weekend</option>
+        </select>
+        <p>Select an hour</p>
+        <select id="ahour">
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+          <option>13</option>
+          <option>14</option>
+          <option>15</option>
+          <option>16</option>
+          <option>17</option>
+          <option>18</option>
+          <option>19</option>
+          <option>20</option>
+          <option>21</option>
+          <option>22</option>
+          <option>21</option>
+          <option>23</option>
+        </select>
+        <button id="s1"> Plot! </button>
+        <hr></hr>
+      </div>
+        <p>Click any station you are interested in to zoom in and see details in popup windows.</p>
+    </div>
+
+    <div class="slide3" style="display: none;">
+        <h2>Predictors: Station Area Predictor Exploration</h2>
+        <p>Apart from the previously mentioned lag variables, the model also includes socio-economic and bike network
+          characteristics of station areas, distance to and average ridership of nearest transit stations for each
+          bike station, and time of depatures. They are all theoritically related to bike trip demand. </p>
+        <p>This page takes a deeper look at station area variables, including employment and population density, median
+          household income, and number of Transit Stations within station area. Station area is
+          defined by 0.5-mile buffer around stations. The origional data comes from ACS census, and Chicago Open Data,
+          and they are summarized and exported in ArcGIS through Spatial Join.</p>
+        <p>The sizes of the each point show the number of the departures total and the color of the each point illustrate
+          the value of station area predictors.
+        <hr></hr>
+        <p>Start by selecting interesting station area predictors</p>
+        <select id ="apredictor">
+          <option>Employment Density</option>
+          <option>Population Density</option>
+          <option>Median Household Income</option>
+          <option>Transit Stations Nearby</option>
+        </select>
+        <button id = "s2">Plot!</button>
+    </div>
+
+
+    <div class="slide4" style="display: none;">
+        <h2>Prediction Results</h2>
+        <p>After throwing all lag variables and station area variables, we use stepwise regression, Anova test,and cross
+          validation to compare and get the final selection of variables. The final model has an adjusted R-square of 0.702,
+          which means 70% of the variations in our dependent variable are explained by our model. It is significant under
+          0.05 confidence level. The VIF test of all included variables are less than 5, suggesting that there is no
+          significant multicollinarity in our independent variables too.</p>
+        <p>In terms of generalizability, we use 100-fold cross validation that subsets the data to 100 folders and uses 99
+          of them as training sets to test the other for 100 times. The mean R-squares of these 100 folds is 0.680,
+          with 0.117 stardared deviation. The mean absolute error is 1.553, with 0.149 standard deviation. Both of these
+          suggesting that the predictive power of our model is consistently high across different observations.
+        <hr></hr>
+        <p>As a justification, select a day and time to check the predicted value. Click any station you are interested in
+          to zoom in and see details in popup windows.</p>
+        <div>
+          <p>Select a day</p>
+          <select id="bweek">
+            <option>Weekday</option>
+            <option>Weekend</option>
+          </select>
+          <p>Select an hour</p>
+          <select id="bhour">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+            <option>21</option>
+            <option>22</option>
+            <option>21</option>
+            <option>23</option>
+          </select>
+          <button id="s3"> Plot! </button>
+        </div>
+    </div>
+
+    <div class="slide5" style="display: none;">
+        <h2>Model Residuels</h2>
+        <p>For a deeper comparison of the predicted value and observed value, this map illustrates the relationship between
+          error and observed hourly departure. The size of the point shows the number of departures, while the color of the point
+          illustrates its error. The darker the color, the farther the distance from the observed value. If it's overestimated,
+          the color is warmer and vice verse. As you may observed from these maps, our model is comparably poor-performing when
+          hourly departure values are high. </p>
+        <p>Also, you can choose same hour but different weekdays, or same day different hours (peak or off peak) to check the
+          serial correlation of our model. In other words, whether the prediction power is consistent across time. You may
+          check the spatial correlations too, simply by observing the spatial color pattern of several plots. If same colors are
+          clustered, then spatial correlation exists and vice verse.
+        <hr></hr>
+        <p>Choose any time and hour to start. Click any interesting points to see a graphic comparison of predicted and observed
+          value in that specific station.</p>
+        <div>
+          <p>Select a day</p>
+          <select id="cweek">
+            <option>Weekday</option>
+            <option>Weekend</option>
+          </select>
+          <p>Select an hour</p>
+          <select id="chour">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+            <option>21</option>
+            <option>22</option>
+            <option>21</option>
+            <option>23</option>
+          </select>
+          <button id="s4"> Plot! </button>
+        </div>
+
+    </div>
+
+    </div>
+
+
+    <!--Slides-->
+    <div>
+      <a class="prev" style="display:none;">&#10094;</a>
+      <a class="next" >&#10095;</a>
+    </div>
+
+    <!-- Map -->
+    <div id="map" class="map"></div>
+
+
+    <!-- Legend -->
+    <div class="legend" style="display:none;">
+      <ul class="legend">
+        <li><span class = "MON"></span> Monday </li>
+        <li><span class = "TUE"></span> Tuesday </li>
+        <li><span class = "WED"></span> Wedsday </li>
+        <li><span class = "THU"></span> Thursday </li>
+        <li><span class = "FRI"></span> Friday </li>
+      </ul>
+    </div>
+    <!-- Javascript Imports -->
+    <script src="js/jquery-2.2.0.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
