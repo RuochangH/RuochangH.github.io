@@ -60,59 +60,68 @@
     </div>
 
       <div id="process" style="display: none;">
-      <button class="btn btn-link collapsed" style="color:#535E80; font-weight:bold; font-size:20px" type="button"
+        <p style="font-size:14px; font-style:italic" >Follow the instructions on the sidebar to find the closest available
+          stations and rebalancing stations. Note that this process requires Easy Bike Balancing to access your location. If you do
+          not wish to provide, you will still get access to view all Divvy stations' availability based on your customized input.
+          However, you will not have access to locate and navigate to the nearest available station or nearby rebalancing station.
+      <button id="locate" class="btn btn-link collapsed" style="color:#535E80; font-weight:bold; font-size:18px" type="button"
       data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
       <i class="fas fa-thumbtack"></i>    Step #1 Locate Yourself</button>
 
         <div class="collapse" id="collapseOne">
-            <p style="color:#535E80; border-radius: 10px; background-color:rgba(191,222,154,0.65); font-size:16px">
+          <div style="border-radius: 10px;  background-color:rgba(191,222,154,0.65); color:#535E80; font-size:16px">
+            <p>
               Pin your location on the map! Click the navigation icon on the top right of the map to allow Easy Bike Rebalancing
-              to locate you. Or you can choose to drag the icon to where you what to start with.</p>
+              to locate you. You can also drag the locator to finalize your location.</p>
+            </div>
 
-
-              <button style="color:#535E80; font-weight:bold; font-size:20px" class="btn btn-link collapsed"
+              <button id="update" style="color:#535E80; font-weight:bold; font-size:18px" class="btn btn-link collapsed"
               style="color:#535E80" type="button" data-toggle="collapse" data-target="#collapseTwo"
-              aria-expanded="false" aria-controls="collapseTwo"><i class="fas fa-exchange-alt"></i>    Step #2 Purpose of Vist
+              aria-expanded="false" aria-controls="collapseTwo"><i class="fas fa-exchange-alt"></i>    Step #2 Purpose of Visit
               </button>
+                <div class="collapse" id="collapseTwo">
+                  <div style="border-radius: 10px; background-color:rgba(245,173,98,0.6); color:#535E80; font-size:16px">
+                    <p>Are you renting a bike or returning a bike? Note that if you did not provide your location data, you can only view all stations.</p>
+                    <select id="purpose">
+                      <option>Station Check</option>
+                      <option>Rent</option>
+                      <option>Return</option>
+                    </select>
+                    <div id="add"></div>
+                  </div>
 
-              <div class="collapse" id="collapseTwo">
-                <div style="border-radius: 10px; background-color:rgba(245,173,98,0.6); color:#535E80; font-size:16px">
-                <p>Are you renting a bike or returning a bike?</p>
-                <select id="purpose">
-                  <option>Rent</option>
-                  <option>Return</option>
-                </select>
-              </div>
-
+                  <button id="viewAll" class="btn btn-sm collapsed"
+                  style="background-color:rgba(126,191,220,0.65); color:#535E80; font-weight:bold; font-size:18px">
+                      <i class="fab fa-laravel"></i>  View All Stations
+                  </button>
 
                 <button id="findStation" class="btn btn-sm collapsed"
-                style="background-color:rgba(126,191,220,0.65); color:#535E80; font-weight:bold; font-size:18px"
-                type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    <i class="fab fa-laravel"></i>  Find Stations
+                style="background-color:rgba(126,191,220,0.65); color:#535E80; font-weight:bold; font-size:18px">
+                    <i class="fab fa-laravel"></i>  Find Your Stations
                 </button>
 
-                <div class="collapse" id="collapseThree">
-                  <p style="margin-top: 16px;color:#535E80; border-radius: 10px; background-color:rgba(236,233,231,0.7); font-size:16px">
-                    As shown on the map, the blue one is the closest available station and the orange one is the
-                    nearby station that's in need of rebalacing.</p>
+                    <p id="routttt" style="display: none; margin-top: 16px;color:#535E80; border-radius: 10px; background-color:rgba(236,233,231,0.7); font-size:16px">
+                    As shown on the map, the orange one is the closest available station and the green one is the
+                    nearby station that's in need of rebalancing.</p>
+                    <p id="alllll" style="display: none; margin-top: 16px;color:#535E80; border-radius: 10px; background-color:rgba(236,233,231,0.7); font-size:16px">
+                    As shown on the map, the lighter the color the worse the availability. Hover over any station to view detail too!</p>
 
+                    <button class="btn btn-sm collapsed" id="route"
+                    style="display: none; background-color:rgba(245,173,98,0.6); color:#535E80; font-weight:bold; font-size:18px"
+                    type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <i class="fas fa-balance-scale"></i>  Compare Routes</button>
+                    <div class="collapse" id="collapseThree">
+                          <p id="all" style="font-size:14px; font-style:italic; margin-top:10px">
+                            Check the routes and make a decision! You can always drag the locators or change the visit purpose and view other possibilities.
+                            Note that you need to find your stations before comparing the updated routes!</p>
 
-                  <button class="btn btn-sm collapsed" id="route"
-                  style="background-color:rgba(245,173,98,0.6); color:#535E80; font-weight:bold; font-size:18px" type="button"
-                  data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                  <i class="fas fa-balance-scale"></i>  Compare Routes</button>
-
-                  <div class="collapse" id="collapseFour">
-                  <p style="margin-top: 16px;color:#535E80; border-radius: 10px; background-color:rgba(126,191,220,0.65); font-size:16px"> It takes you </p>
-                </div>
-                </div>
+                          </div>
               </div>
         </div>
       </div>
   </div>
 
 <div id='map' class="map"></div>
-
 
 <div class='legend0'>
   <h5 style="color:#535E80">Live Station Availability</h5>
@@ -124,7 +133,15 @@
   <div style="font-size:12px">Circle Sizes are Proportionate to the Total Docks.</div>
 </div>
 
+<div class='legend1' style="display: none;">
+  <h5 style="color:#535E80"><span> Availability</h5>
+  <div id="pd0"><h6 style="color:grey">Hover Over a Station for Detail</h6></div>
+  <div><span style='background-color: #ece9e7'><i class="fas fa-bicycle fa-sm" data-fa-transform="up-6"></i></span>0</div>
+  <div><span style='background-color: #7981d0'><i class="fas fa-bicycle fa-sm" data-fa-transform="up-6"></i></span>30</div>
+</div>
+
 <script src="js/new.js"></script>
+<script src="js/decode.js"></script>
 
 
 

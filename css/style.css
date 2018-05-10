@@ -1,184 +1,184 @@
-body {
-    padding: 0;
-    overflow: hidden;
-    font-family: colfax, helvetica, arial, sans-serif;
+.sidebar {
+  position:absolute;
+  width:360px;
+  z-index: 10;
+  height: 100%;
+  margin-right: 6px;
+  margin-left: 6px;
+  margin-top: -6px;
+  bottom:0;
+  font-family:Franklin Gothic Book;
 }
 
-h1{
-  font-family:AppleGothic;
-  font-size:26px;
-  color:#355C7D;
+
+#shade1{
+  position:absolute;
+  top:15px;
+  left:45px;
+  opacity:0.30;
 }
 
-h2{
-  font-family:AppleGothic;
-  font-size:18px;
-  color:#F8B195;
+#shade2{
+  position:absolute;
+  top:15px;
+  left:66px;
+  opacity:0.50;
 }
 
-p.intro {
-  font-family:DINPro;
-  font-size:15px;
-  color:#444649;
+#solid{
+  position:absolute;
+  top:15px;
+  left:90px;
 }
 
-p {
-  font-family:DINPro;
-  font-size:15px;
-  color: #355C7D;
+#name{
+  font-family: AppleGothic;
+  font-weight: bold;
+  text-align: center;
 }
 
-select {
-  background-color: none;
-  font-family: DINPro;
-  color: #355C7D;
+.intro{
+  position:absolute;
+  top:180px;
 }
 
-.map {
+
+#process{
+  position:absolute;
+  top:180px;
+  width:370px;
+  margin-left: 10px;
+  margin-right:10px;
+}
+
+
+.collapse{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#map {
     position: absolute;
     right: 0px;
+    bottom:0;
     left: 400px;
     height: 100%;
     top: 0;
-    z-index:1;
 }
 
-.sidebar {
-    position: absolute;
-    left: 0px;
-    width: 400px;
-    top: 0;
-    bottom: 0;
-    overflow-y: auto;
-    padding: 20px;
-    font-size: 16px;
-}
-
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-}
-
-.next {
+.legend0 {
+  background-color:#fff;
+  border-radius:10px;
+  bottom:30px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.10);
+  font:14px 'Franklin Gothic Book'
+  padding: 10px;
   position:absolute;
-  right:0;
-  border-radius: 3px 0 0 3px;
-  z-index:2;
+  right:10px;
+  z-index: 1;
+  opacity: 0.8;
 }
 
-.prev {
+.legend0 div span {
+  border-radius: 50%;
+  border:2px solid #535E80;
+  height:20px;
+  margin-right:5px;
+  width: 20px;
+}
+
+.legend1 {
+  background-color:#fff;
+  border-radius:10px;
+  bottom:30px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.10);
+  font:14px 'Franklin Gothic Book'
+  padding: 10px;
   position:absolute;
-  left: 400px;
-  border-radius: 3px 0 0 3px;
-  z-index:2;
+  right:10px;
+  z-index: 1;
+  opacity: 0.8;
 }
 
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+.legend1 div span {
+  border-radius: 50%;
+  border:2px solid #535E80;
+  height:20px;
+  margin-right:5px;
+  width: 20px;
 }
 
-button {
-    display:block;
-    background-color: #F8B195;
-    border: none;
-    color: #355C7D;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 24px 0px;
-    cursor: pointer;
-    font-family: DINPro;
+.bar.positive {
+  fill: #7EBFDC;
 }
 
-.info1{
-  padding: 6px 8px;
-  font:14px/16px AppleGothic, Helvatica;
-  background: white;
-  background: rgba(255,255,255,0.8);
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  border-radius: 5px;
-}
-
-.info3{
-  padding: 6px 8px;
-  font:14px/16px AppleGothic, Helvatica;
-  background: white;
-  background: rgba(255,255,255,0.8);
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  border-radius: 5px;
-}
-
-h4 {
-  margin: 0 0 5px;
-  color: #355C7D;
-}
-
-.infoLegend1 {
-    line-height: 18px;
-    color: #555;
-}
-.infoLegend1 i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-}
-
-.infoLegend3 {
-    line-height: 18px;
-    color: #555;
-}
-.infoLegend3 i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-}
-
-.infoLegend5 {
-    line-height: 18px;
-    color: #555;
-}
-.infoLegend5 i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-}
-
-
-.chart rect{
-  fill: #F8B195;
-}
-
-.chart text{
-  fill:#355C7D;
-  font:12px AppleGothic;
-  text-anchor:end;
+.bar.negative {
+  fill: #F5AD62;;
 }
 
 .axis text {
-  font: 10px AppleGothic;
+  font: 10px Franklin Gothic Book;
 }
 
 .axis path,
 .axis line {
   fill: none;
-  stroke:#000;
-  shape-rendering:crispEdges;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
 
-.axis text{
-  fill: "#355C7D";
+#s0 {
+    display:block;
+    background-color: #F5AD62;
+    border: none;
+    color: #535E80;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 10px 0px;
+    cursor: pointer;
+}
+
+#purpose {
+    display:block;
+    background-color: rgba(236,233,231,0.8);
+    border: none;
+    color: #535E80;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 25px 0px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+/* =============
+Media Queries
+============= */
+
+
+.street-selected path {
+  -webkit-animation: active 5s ease-out;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes active {
+    0% {opacity: 1;}
+    50% {opacity: 1; stroke-width: 10;}
+    100% {opacity: 1;}
+}
+
+@media screen and (min-width: 480px) and (max-width: 800px) {
+    /*.item {
+        background-color: blue;
+    }*/
+}
+
+@media screen and (max-width: 479px) {
+    /*.item {
+        background-color: red;
+    }*/
 }
