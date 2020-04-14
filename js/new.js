@@ -14,7 +14,7 @@ map.addControl(new mapboxgl.NavigationControl());
 
 //Get and Plot Live and historical data
 //Size and fill styling are based on bike and dock availability
-var url = 'https://www.rideindego.com/stations/json/';
+var url = 'https://kiosks.bicycletransit.workers.dev/phl';
 var histURL = 'https://raw.githubusercontent.com/RuochangH/Final_Huang-Ruochang/master/final.geojson';
 
 var landingPage =function(){
